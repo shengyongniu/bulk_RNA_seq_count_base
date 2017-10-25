@@ -1,0 +1,29 @@
+#!/bin/bash -l
+
+# we are going to set these paramenters through cmdline (but you can always hardcoded the parameters if they are going to be fixed.:
+
+
+# Now let's keep track of some information just in case anything goes wrong
+echo "=========================================================="
+echo "Starting on : $(date)"
+echo "Running on node : $(hostname)"
+echo "Current directory : $(pwd)"
+echo "Current job ID : $JOB_ID"
+echo "Current job name : $JOB_NAME"
+echo "Task index number : $SGE_TASK_ID"
+echo "=========================================================="
+
+
+module load bedtools/2.26.0
+module load samtools
+module load java/1.8.0_92
+module load picard/2.9.4
+
+INFILE=`find /restricted/projectnb/chengcancer/Simon/project/Ho_lab/0raw/SN0126773/*.bam | sed 's/.bam$//'| head -${SGE_TASK_ID} |tail -1`
+echo "NOW in TASK ${SGE_TASK_ID} : PROCESSING $INFILE ..."
+
+samtools sort -n ${INFILE}.bam  -o ${INFILE}.qsort.bam  -@ 6
+java -jar /share/pkg/picard/2.9.4/install/lib/picard.jar SamToFastq \
+     I=${INFILE}.qsort.bam \
+     FASTQ=${INFILE}_R1.fq.gz \
+     SECOND_END_FASTQ=${INFILE}_R2.fq.gz
