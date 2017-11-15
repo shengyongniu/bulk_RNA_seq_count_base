@@ -13,8 +13,8 @@ echo "=========================================================="
 
 module load fastqc
 
-INFILE=`find /restricted/projectnb/chengcancer/Simon/project/Ho_lab/0raw/SN0126773/*.fq.gz | sed 's/.fq.gz$//'| head -${SGE_TASK_ID} |tail -1`
+INFILE=`find /myPath/SN0126773/*.fq.gz | sed 's/.fq.gz$//'| head -${SGE_TASK_ID} |tail -1`
 echo "NOW in TASK ${SGE_TASK_ID} : PROCESSING $INFILE ..."
 
-fastqc -o /restricted/projectnb/chengcancer/Simon/project/Ho_lab/1fastqc  ${INFILE}.fq.gz ;
+fastqc -o /myPath/1fastqc  ${INFILE}.fq.gz ;
 
