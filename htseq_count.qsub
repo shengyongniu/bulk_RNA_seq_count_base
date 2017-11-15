@@ -15,11 +15,11 @@ module load python2.7/Python-2.7.3_gnu446
 module load htseq/0.6.1p1
 
 
-INFILE=`find /restricted/projectnb/chengcancer/Simon/project/Ho_lab/0raw/SN0126773/*_sorted.bam | sed 's/_sorted.bam$//'| head -${SGE_TASK_ID} |tail -1`
+INFILE=`find /myPath/SN0126773/*_sorted.bam | sed 's/_sorted.bam$//'| head -${SGE_TASK_ID} |tail -1`
 echo "NOW in TASK ${SGE_TASK_ID} : PROCESSING $INFILE ..."
 
 
-htseq-count -f bam -r name -i gene_id -s reverse  -t exon ${INFILE}_sorted.bam /restricted/projectnb/chengcancer/Simon/project/Ho_lab/Homo_sapiens.GRCh37.55.gtf   >  ${INFILE}_count.txt 
+htseq-count -f bam -r name -i gene_id -s reverse  -t exon ${INFILE}_sorted.bam /myPath/Homo_sapiens.GRCh37.55.gtf   >  ${INFILE}_count.txt 
 
 
 
