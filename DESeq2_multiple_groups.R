@@ -2,7 +2,7 @@ source("http://bioconductor.org/biocLite.R")
 #biocLite('DESeq2')
 library('DESeq2')
 library("stringi")
-directory<-'/restricted//projectnb/chengcancer/Simon/project/Ho_lab//2analysis/'
+directory<-'/myPath/'
 setwd(directory)
 
 
