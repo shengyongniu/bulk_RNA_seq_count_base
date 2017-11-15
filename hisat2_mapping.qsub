@@ -13,10 +13,10 @@ echo "=========================================================="
 
 module load  hisat2/2.0.3-beta
 
-INFILE=`find /restricted/projectnb/chengcancer/Simon/project/Ho_lab/0raw/SN0126773/*_R1_sorted.fq.gz | sed 's/_R1_sorted.fq.gz$//'| head -${SGE_TASK_ID} |tail -1`
+INFILE=`find /myPath/SN0126773/*_R1_sorted.fq.gz | sed 's/_R1_sorted.fq.gz$//'| head -${SGE_TASK_ID} |tail -1`
 echo "NOW in TASK ${SGE_TASK_ID} : PROCESSING $INFILE ..."
 
 # call tophat for individual file distributed by task id
 
 
-hisat2 -p 8 -q --dta -x /restricted/projectnb/chengcancer/Simon/project/T2D/annotation_file/ref_genome_ensembl/index/Homo_sapiens.GRCh38.dna_snp  -1 ${INFILE}_R1_sorted.fq.gz  -2 ${INFILE}_R2_sorted.fq.gz  -S  ${INFILE}.sam 
+hisat2 -p 8 -q --dta -x /myPath/Homo_sapiens.GRCh38.dna_snp  -1 ${INFILE}_R1_sorted.fq.gz  -2 ${INFILE}_R2_sorted.fq.gz  -S  ${INFILE}.sam 
